@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {% if user.profile_pic_path %}
+                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt=""/>
+                    {%else%}
+
+                    <p>No profile picture</p>
+
+                    {% endif %}
+
+                    {% if user == current_user %}
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post"
+                            enctype="multipart/form-data">
+
+                        <input type="file" name="photo" class="form-control" required>
+                        <input type="submit" class="btn btn-default btn-sm">
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                                {{username|capitalize}}
+                            </h5>
+                            {% if user.bio %}
+                            <p>
+                                {{user.bio}}
+                            </p>
+                            {% else %}
+                            <p class="proile-rating">SORRY! <span>Bio comming soon.</span></p>
+                            {% endif %}
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a href="{{url_for('main.update_profile', uname=user.username)}}" class="btn btn-primary" name="btnAddMore">Edit Profile</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if pitches %}
+                                <h3 style="text-transform: uppercase">My Pitches</h3>
+                                    <hr>
+                                    {% for pitch in pitches %}
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">{{pitch.category}}</div>
+                                        <div class="panel-body">
+                                            <i>{{pitch.pitch_title|safe}}</i>
+                                            <p></p>{{pitch.pitch_body|safe}}<p></p>{{pitch.posted}}
+                                        </div>
+                                        <div class="panel-footer">
+                                            <a href="{{url_for('main.delete_pitch', id=pitch.id)}}" class="btn btn-danger">
+                                                Delete 
+                                            </a>
+                                        </div>
+                                    </div>
+                        
+                                    {% endfor %}
+                                    {% else %}
+                                    <h1>You have no pitches!</h1>
+                                    {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>           
+</div>
+
+
+
+
+
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>{{username|capitalize}}</h3>
+            {% if user.bio %}
+            <p> {{user.bio}} </p>
+            {% else %}
+            <p> {{user.username|capitalize}} has no bio </p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            {% if user.profile_pic_path %}
+
+            <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+
+            {%else%}
+            <p>No profile picture</p>
+
+            {% endif %}
+
+            {% if user == current_user %}
+            <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post"
+                enctype="multipart/form-data">
+
+                <input type="file" name="photo" class="form-control" required>
+                <input type="submit" class="btn btn-default btn-sm">
+            </form>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <a href="{{url_for('main.update_profile', uname=user.username)}}">Edit profile</a>
+        </div>
+
+    </div>
+    <div class="row">
+        {% if pitches %}
+        <h3 style="text-transform: uppercase">My Pitches</h3>
+            <hr>
+            {% for pitch in pitches %}
+            <div class="panel panel-success">
+                <div class="panel-heading">{{pitch.category}}</div>
+                <div class="panel-body">
+                    <i>{{pitch.pitch_title|safe}}</i>
+                    <p></p>{{pitch.pitch_body|safe}}<p></p>{{pitch.posted}}
+                </div>
+                <div class="panel-footer">
+                    <a href="{{url_for('main.delete_pitch', id=pitch.id)}}">
+                        <i title="Delete pitch." class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </div>
+            </div>
+
+            {% endfor %}
+            {% else %}
+            <h1>You have no pitches!</h1>
+            {% endif %}
+    </div>
+</div> -->
+
+
+<style>
+    body{
+    background-color: #F4F2F3;
+}
+    .emp-profile{
+    padding: 3%;
+    margin-top: 10em;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+</style>
+{% endblock %}

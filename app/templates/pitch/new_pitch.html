@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content%}
+<div class="container new-pitch">
+    <div class="col-md-12">
+        {{ wtf.quick_form(pitch_form)}}
+        {{simplemde.load}}
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #F4F2F3;
+    }
+
+    .new-pitch {
+        margin-top: 8em;
+        padding: 3%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+</style>
+{% endblock %}
