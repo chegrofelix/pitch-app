@@ -1,13 +1,3 @@
-# from flask import render_template
-# from app import app
-# from app.forms import LoginForm
-
-# # ...
-
-# @app.route('/login')
-# def login():
-#     form = LoginForm()
-#     return render_template('login.html', title='Sign In', form=form)
 from . import main
 from flask import render_template, request, redirect, url_for, abort
 from flask_login import login_required, current_user
@@ -30,7 +20,7 @@ def index():
         'Trends'
         ]
 
-    title = 'Pitch Perfect'
+    title = 'Pitch app'
     pitches = Pitch.query.all()
 
     return render_template('index.html', title = title, pitches = pitches, categories = categories)
@@ -90,7 +80,7 @@ def new_pitch():
         new_pitch = Pitch(pitch_title = pitch_title, pitch_body = pitch_body, user = current_user, category =form.category.data, postedBy = current_user.username)
         new_pitch.save_pitch()
 
-    title = 'Pitch Perfect'
+    title = 'Pitch app'
     return render_template('pitch/new_pitch.html', title = title, pitch_form = form)
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET', 'POST'])
@@ -111,7 +101,7 @@ def new_comment(id):
 
         return redirect(url_for('.pitch', id = id))
 
-    title = 'Pitch Perfect'
+    title = 'Pitch app'
 
     return render_template('pitch/comment.html', title = title, form = form, pitch = pitch)
 

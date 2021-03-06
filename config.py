@@ -37,7 +37,7 @@ class Config:
     '''
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:postgres@localhost/postgres'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:1234@localhost/chrome'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOADED_PHOTOS_DEST = 'app/static/photos' 
     # email configuration
