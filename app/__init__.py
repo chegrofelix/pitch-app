@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_mail import Mail
 from flask_simplemde import SimpleMDE
+from werkzeug.utils import secure_filename
 
 
 # Initializing Login Manager
