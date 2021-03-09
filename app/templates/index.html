@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 <!-- Styles block -->
 {% block styles %} {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}" />
@@ -22,7 +23,7 @@
 <body>
 {% block content %}
 
-     <div class="container home">
+      <div class="container-fluid">
         <div class="row">
     {% for category in categories %}
             
@@ -52,20 +53,20 @@
                         {% else %}
                         <ul class="list-inline d-sm-flex my-0">
                             <li class="list-inline-item g-mr-20">
-                                <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                <!-- <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!"> -->
                                     <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
                                     0
                                 </a>
                             </li>
                             <li class="list-inline-item g-mr-20">
-                                <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                <!-- <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!"> -->
                                     <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
                                     0
                                 </a>
                             </li>
                             <li class="list-inline-item ml-auto">
-                                <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                                    <!-- <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i> -->
+                                <!-- <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!"> -->
+                                    <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
                                     {{pitch.postedBy|safe}}
                                 </a>
                             </li>
@@ -80,11 +81,8 @@
         {% endfor %}
         </div>
     </div>
-    <style>
-        .home {
-            margin-top: 8em;
-        }
-
+     <style>
+       
         @media (min-width: 0) {
             .g-mr-15 {
                 margin-right: 1.07143rem !important;
@@ -110,27 +108,14 @@
                 padding: 2.14286rem !important;
             }
         }
-
-        .g-bg-secondary {
-            background-color: #fafafa !important;
+        body{
+            background-color: #e3d0b9;
+            
         }
+    </style>  
+    
 
-        .u-shadow-v18 {
-            box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
-        }
-
-        .g-color-gray-dark-v4 {
-            color: #777 !important;
-        }
-
-        .g-font-size-12 {
-            font-size: 0.85714rem !important;
-        }
-
-        .media-comment {
-            margin-top: 20px;
-        }
-    </style>
+    
 {% endblock %}
 </body>
 

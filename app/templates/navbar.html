@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="/">Pitch App</a>
         
-        <div class="collapse navbar-collapse" id="navbar-info">
+        <!-- <div class="collapse navbar-collapse" id="navbar-info">
             <div class="navbar-collapse-header">
                 <div class="row">
                     <div class="col-6 collapse-brand">
@@ -12,7 +12,7 @@
                     <div class="col-6 collapse-close">
                         
                     </div>
-                </div>
+                </div> -->
             </div>
             <ul class="navbar-nav ml-auto">
                 {% if current_user.is_authenticated %}
@@ -50,4 +50,9 @@
             </ul>
         </div>
     </div>
+    <style>
+        .nav-item{
+            display: inline-block;
+        }
+    </style>
 </nav>
